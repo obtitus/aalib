@@ -2,7 +2,6 @@
 #include "aaint.h"
 void aa_puts(aa_context * c, int x, int y, enum aa_attribute attr, __AA_CONST char *s)
 {
-    char s1[10000];
     int pos, pos1;
     int x1, y1;
     if (x < 0 || y < 0 || x >= aa_scrwidth(c) || y >= aa_scrheight(c))
@@ -10,7 +9,6 @@ void aa_puts(aa_context * c, int x, int y, enum aa_attribute attr, __AA_CONST ch
     x1 = x;
     y1 = y;
     for (pos = 0; s[pos] != 0 && pos < 10000; pos++) {
-	s1[pos] = s[pos];
 	pos1 = x1 + y1 * aa_scrwidth(c);
 	c->textbuffer[pos1] = s[pos];
 	c->attrbuffer[pos1] = attr;
