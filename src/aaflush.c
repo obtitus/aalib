@@ -20,30 +20,33 @@ static void aa_display(aa_context * c, int x1, int y1, int x2, int y2)
 	x1 = 0;
     if (y1 < 0)
 	y1 = 0;
-	if (c->driver->print == NULL)
-	    return;
-	pos = 0;
-	for (y = y1; y < y2; y++) {
-	    pos = y * aa_scrwidth(c) + x1;
-	    c->driver->gotoxy(c, x1, y);
-	    for (x = x1; x < x2;) {
-		p = 0;
-		attr = c->attrbuffer[pos];
-		while (p < 79 && x < x2 && c->attrbuffer[pos] == attr) {
-		    str[p] = c->textbuffer[pos];
-		    pos++;
-		    p++;
-		    x++;
-		}
-		str[p] = 0;
-		HIDEMOUSE
-		c->driver->setattr(c, attr);
-		c->driver->print(c, (char *)str);
-	    }
-	c->driver->gotoxy(c, c->cursorx, c->cursory);
+    
+    if (c->driver->print == NULL)
+      return;
+
+    pos = 0;
+    for (y = y1; y < y2; y++) {
+      pos = y * aa_scrwidth(c) + x1;
+      c->driver->gotoxy(c, x1, y);
+      for (x = x1; x < x2;) {
+	p = 0;
+	attr = c->attrbuffer[pos];
+	while (p < 79 && x < x2 && c->attrbuffer[pos] == attr) {
+	  str[p] = c->textbuffer[pos];
+	  pos++;
+	  p++;
+	  x++;
+	}
+	str[p] = 0;
+	HIDEMOUSE
+	  c->driver->setattr(c, attr);
+	c->driver->print(c, (char *)str);
+      }
+      c->driver->gotoxy(c, c->cursorx, c->cursory);
     }
-        if(hidden&&cursor)
-	   aa_showmouse(c);
+    
+    if(hidden&&cursor)
+      aa_showmouse(c);
 }
 void aa_hidemouse(aa_context *c)
 {
