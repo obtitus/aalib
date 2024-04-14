@@ -64,9 +64,13 @@ void aa_renderpalette(aa_context * c, __AA_CONST aa_palette palette, __AA_CONST 
 	if (errors[0] == NULL)
 	    dither = AA_ERRORDISTRIB;
 	errors[0] += 3;
+
 	errors[1] = calloc(1, (x2 + 5) * sizeof(int));
-	if (errors[1] == NULL)
-	    free(errors[0]), dither = AA_ERRORDISTRIB;
+	if (errors[1] == NULL) {
+	  free(errors[0] - 3);
+	  dither = AA_ERRORDISTRIB;
+	}
+
 	errors[1] += 3;
 	cur = 0;
     }
