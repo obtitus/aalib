@@ -1,5 +1,6 @@
-#include <stdio.h>
 #include "aalib.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define XSIZ aa_imgwidth(context)
 #define YSIZ (aa_imgheight(context)-4)
