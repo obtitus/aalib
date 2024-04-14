@@ -25,7 +25,7 @@ unsigned short *aa_mktable(aa_context * c)
 {
     int i;
     int i1, i2, i3, i4;
-    int sum, pos;
+    int pos;
     __AA_CONST struct aa_font *currfont = c->params.font;
     int supported = c->params.supported;
     unsigned short *next;
@@ -60,7 +60,6 @@ unsigned short *aa_mktable(aa_context * c)
 	       if(p2>15) p2=15;
 	       if(p3>15) p3=15;
 	       if(p4>15) p4=15; */
-	    sum = parameters[i].p[4];
 	    pos = pos(p1, p2, p3, p4);
 	    if (table[pos]) {
 		int sum;
