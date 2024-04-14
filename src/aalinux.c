@@ -98,7 +98,7 @@ linux_init (__AA_CONST struct aa_hardware_params *p, __AA_CONST void *none,
     return 0;
   if (!registered)
     {
-      char *data;
+      unsigned char *data;
       fd = open ("/dev/console", 0);
       if (fd >= 0)
 	{
@@ -159,9 +159,7 @@ linux_getsize (aa_context * c, int *width, int *height)
   {
     unsigned char lines, cols, x, y;
   }
-  scrn =
-  {
-  0, 0, 0, 0};
+  scrn = {0, 0, 0, 0};
   *width = 0;
   *height = 65536;
   if (!readonly)
@@ -201,7 +199,7 @@ static void
 linux_flush (aa_context * c)
 {
   int i;
-  int x, y, xstart = 0, xend, end = aa_scrwidth (c) * aa_scrheight (c);
+  int x, y, xstart = 0;
   unsigned char data[] = { 0x07, 0x08, 0x0f, 0x0f, 0x70, 0x17 };
   for (i = 0; i < nvcs; i++)
     {
