@@ -91,10 +91,8 @@ gentable (void)
 static void
 firemain (void)
 {
-  register unsigned int i;
   unsigned char *p;
-  char *bitmap = aa_image (context);
-  i = 0;
+  unsigned char *bitmap = aa_image (context);
 #define END (bitmap + XSIZ * YSIZ)
   for (p = bitmap; p <= (unsigned char *) (END); p += 1)
     {
@@ -110,7 +108,7 @@ drawfire (void)
   unsigned int i, last1, i1, i2;
   static int loop = 0, sloop = 0, height = 0;
   register unsigned char *p;
-  char *bitmap = aa_image (context);
+  unsigned char *bitmap = aa_image (context);
 
   height++;
   loop--;
@@ -118,7 +116,7 @@ drawfire (void)
     loop = rand () % 3, sloop++;;
   i1 = 1;
   i2 = 4 * XSIZ + 1;
-  for (p = (char *) bitmap + XSIZ * (YSIZ + 0);
+  for (p = (unsigned char *) bitmap + XSIZ * (YSIZ + 0);
        p < ((unsigned char *) bitmap + XSIZ * (YSIZ + 1));
        p++, i1 += 4, i2 -= 4)
     {
