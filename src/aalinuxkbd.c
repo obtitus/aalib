@@ -6,7 +6,7 @@
  *
  * needs keymap support in kernel - been there since 0.99pl12 I think.
  */
-
+#include <stdlib.h>
 #include "config.h"
 #ifdef LINUX_DRIVER
 #include <sys/time.h>
@@ -132,7 +132,7 @@ static int get_keyb_map(void)
     for (f = 0; f < NR_KEYS; f++) {
 	keyb_ent.kb_index = f;
 
-	if (ioctl(tty_fd, KDGKBENT, (unsigned int) &keyb_ent))
+	if (ioctl(tty_fd, KDGKBENT, (unsigned long) &keyb_ent))
 	    return (0);
 
 	keymap[0][f] = keyb_ent.kb_value;
@@ -141,7 +141,7 @@ static int get_keyb_map(void)
     for (f = 0; f < NR_KEYS; f++) {
 	keyb_ent.kb_index = f;
 
-	if (ioctl(tty_fd, KDGKBENT, (unsigned int) &keyb_ent))
+	if (ioctl(tty_fd, KDGKBENT, (unsigned long) &keyb_ent))
 	    return (0);
 
 	keymap[1][f] = keyb_ent.kb_value;
@@ -167,7 +167,7 @@ static void blank_key_down(void)
 {
     int f;
 
-    for (f = 0; f < NR_KEYS; f++)
+    for (f = 0; f < sizeof(key_down); f++)
 	key_down[f] = 0;
 }
 
@@ -200,7 +200,7 @@ static void vt_to_here(int num)
 static int rawmode_init(void)
 {
     if (!closed)
-	return;
+        return (0);
     mypid = getpid();
     if (tty_fd == -1) {
 	tty_fd = fileno(stdin);
